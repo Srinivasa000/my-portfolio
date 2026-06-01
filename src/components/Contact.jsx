@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, ShieldCheck, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ShieldCheck, Check, Lock, Unlock, X } from 'lucide-react';
 
 const GithubIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -21,6 +21,8 @@ export default function Contact() {
   const [formState, setFormState] = useState({ name: '', org: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showEncryptionModal, setShowEncryptionModal] = useState(false);
+  const [rawBodyText, setRawBodyText] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,10 +30,7 @@ export default function Contact() {
 
     setIsSubmitting(true);
 
-    // Generate native pre-filled secure mailto coordinates
-    const recipient = 'srinivasaraomaddikunta131@gmail.com';
-    const subject = encodeURIComponent(`Secure Portfolio Message from ${formState.name}`);
-    const body = encodeURIComponent(
+    const bodyText = 
       `==========================================\n` +
       ` SECURE TRANSMISSION HANDSHAKE RECEIVED  \n` +
       `==========================================\n\n` +
@@ -44,25 +43,35 @@ export default function Contact() {
       `${formState.message}\n\n` +
       `==========================================\n` +
       ` End of secure coordinate transmission. \n` +
-      `==========================================`
-    );
+      `==========================================`;
 
-    // Simulate encryption and handshake before launching client
+    setRawBodyText(bodyText);
+
+    // Simulate encryption and handshake before launching approval box
     setTimeout(() => {
       setIsSubmitting(false);
-      setIsSubmitted(true);
+      setShowEncryptionModal(true);
+    }, 1000);
+  };
 
-      // Trigger standard mail client coordination redirect
-      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+  const handleConfirmSend = () => {
+    const recipient = 'srinivasaraomaddikunta131@gmail.com';
+    const subject = encodeURIComponent(`Secure Portfolio Message from ${formState.name}`);
+    const body = encodeURIComponent(rawBodyText);
 
-      // Reset form states
-      setFormState({ name: '', org: '', email: '', message: '' });
+    // Trigger standard mail client coordination redirect
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
-      // Reset success status after a delay
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1200);
+    setShowEncryptionModal(false);
+    setIsSubmitted(true);
+
+    // Reset form states
+    setFormState({ name: '', org: '', email: '', message: '' });
+
+    // Reset success status after a delay
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 5000);
   };
 
   return (
@@ -275,6 +284,83 @@ export default function Contact() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* ─── LOCAL ENCRYPTED TRANSMISSION MODAL ─── */}
+      <AnimatePresence>
+        {showEncryptionModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] bg-obsidian-950/80 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="w-full max-w-lg bg-surface border border-surface-border rounded-xl p-6 shadow-[0_15px_50px_rgba(0,0,0,0.6)] space-y-6 font-sans text-left relative overflow-hidden"
+            >
+              {/* Glowing header line */}
+              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-indigo-500 to-rose-400" />
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <Lock className="w-5 h-5 text-indigo-400 animate-pulse" />
+                  <span className="font-mono text-xs uppercase tracking-widest text-indigo-400 font-bold">
+                    Terminal Handshake Box
+                  </span>
+                </div>
+                <button
+                  onClick={() => setShowEncryptionModal(false)}
+                  className="p-1 hover:bg-obsidian-950 border border-surface-border hover:text-rose-400 rounded transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg font-outfit font-extrabold text-white">
+                  Local Encrypted Message Payload
+                </h3>
+                <p className="text-slate-400 text-xs leading-relaxed font-sans font-light">
+                  Your message coordinates have been locally prepared and compiled into a secure handshake payload. Click <strong className="text-indigo-300">"Confirm & Send"</strong> to open your mail client and send it directly to Srinivasa's inbox!
+                </p>
+              </div>
+
+              {/* Encryption Code Display Panel */}
+              <div className="p-4 bg-obsidian-950 rounded border border-surface-border/80 font-mono text-[10px] text-slate-300 max-h-56 overflow-y-auto whitespace-pre leading-relaxed select-all">
+                {rawBodyText}
+              </div>
+
+              <div className="p-3.5 bg-indigo-600/5 border border-indigo-500/10 rounded flex items-center gap-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                <span className="text-[9px] font-mono font-bold text-indigo-400 uppercase tracking-widest">
+                  HANDSHAKE STATUS: PENDING_USER_AUTHORIZATION
+                </span>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  onClick={() => setShowEncryptionModal(false)}
+                  className="flex-1 px-4 py-2.5 bg-obsidian-900 border border-surface-border text-slate-400 hover:text-white rounded font-outfit font-semibold text-xs tracking-wider transition-colors duration-300"
+                >
+                  ABORT
+                </button>
+                <button
+                  onClick={handleConfirmSend}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-outfit font-semibold text-xs tracking-wider border border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-all duration-300"
+                >
+                  <span>CONFIRM & SEND</span>
+                  <Send className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
