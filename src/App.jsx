@@ -8,6 +8,7 @@ import Timeline from './components/Timeline';
 import Philosophy from './components/Philosophy';
 import AiChat from './components/AiChat';
 import Contact from './components/Contact';
+import InteractivePointer from './components/InteractivePointer';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,12 +31,14 @@ export default function App() {
     { href: '#skills', label: 'expertise' },
     { href: '#projects', label: 'work' },
     { href: '#experience', label: 'milestones' },
-    { href: '#assistant', label: 'assistant' },
+    { href: '#resume-bot', label: 'resume bot' },
     { href: '#contact', label: 'contact' },
   ];
 
+
   return (
     <div className="bg-obsidian-950 text-slate-100 min-h-screen relative font-sans">
+      <InteractivePointer />
 
       {/* ─── STICKY NAVIGATION BAR ─── */}
       <nav

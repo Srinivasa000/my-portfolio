@@ -66,8 +66,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 md:px-16 max-w-6xl mx-auto border-t border-surface-border/30">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+    <section id="contact" className="w-full border-t border-surface-border/30 py-24 md:py-32 bg-obsidian-950/10">
+      <div className="max-w-6xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
         
         {/* Left Col: Availability, Info & Socials */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-8">

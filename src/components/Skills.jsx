@@ -52,9 +52,10 @@ export default function Skills() {
     : skills.filter(skill => skill.category === activeCategory);
 
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 md:px-16 max-w-6xl mx-auto border-t border-surface-border/30">
-      <div className="space-y-4 text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2">
+    <section id="skills" className="w-full border-t border-surface-border/30 py-24 md:py-32 bg-obsidian-950/10">
+      <div className="max-w-6xl mx-auto px-6 md:px-16">
+        <div className="space-y-4 text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2">
           <span className="h-[1px] w-6 bg-indigo-400"></span>
           <span className="text-xs uppercase tracking-[0.25em] text-indigo-400 font-mono">Act III</span>
           <span className="h-[1px] w-6 bg-indigo-400"></span>
@@ -146,6 +147,7 @@ export default function Skills() {
           );
         })}
       </motion.div>
-    </section>
+    </div>
+  </section>
   );
 }

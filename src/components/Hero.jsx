@@ -48,7 +48,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center justify-center py-24 md:py-32 px-6 md:px-16 overflow-hidden cinematic-grid"
+      className="relative min-h-screen flex items-center justify-center py-24 md:py-32 overflow-hidden cinematic-grid"
     >
       {/* Drifting Glowing Ambient Orbs */}
       <motion.div
@@ -64,7 +64,7 @@ export default function Hero() {
         style={{ background: 'radial-gradient(circle, rgba(244,63,94,0.08) 0%, transparent 70%)' }}
       />
 
-      <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col justify-center">
+      <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-16 flex flex-col justify-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
