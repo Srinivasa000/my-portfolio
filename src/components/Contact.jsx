@@ -59,8 +59,14 @@ export default function Contact() {
     const subject = encodeURIComponent(`Secure Portfolio Message from ${formState.name}`);
     const body = encodeURIComponent(rawBodyText);
 
-    // Trigger standard mail client coordination redirect
+    // Direct browser-based Gmail Compose redirect
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
+
+    // Trigger standard local mail client redirect
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    
+    // Simultaneously open prefilled webmail compose in a new tab for seamless fallback
+    window.open(gmailComposeUrl, '_blank');
 
     setShowEncryptionModal(false);
     setIsSubmitted(true);
