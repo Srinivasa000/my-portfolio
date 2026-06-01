@@ -2,6 +2,8 @@
 
 Welcome to the digital identity codebase of **Srinivasa Rao Maddikunta**, an Artificial Intelligence and Machine Learning Engineer. This repository hosts a premium, cinematic storytelling portfolio website showcasing verified computational developments, advanced model pipelines, and interactive recruiter intelligence interfaces.
 
+🌐 **Live Portfolio:** [my-portfolio-srinivasa.vercel.app](https://my-portfolio-srinivasa.vercel.app/)
+
 ---
 
 ## ⚡ Technical Profile Summary
